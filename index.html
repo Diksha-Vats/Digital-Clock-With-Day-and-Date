@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock With Date</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body onload="initClock()">
+    <div class="datetime">
+        <div class="date">
+            <span id="dayname">Day</span>,
+            <span id="month">Month</span>
+            <span id="daynum">00</span>,
+            <span id="year">Year</span>
+        </div>
+        <div class="time">
+            <span id="hour">00</span>:
+            <span id="min">00</span>:
+            <span id="sec">00</span>
+            <span id="period">AM</span>
+        </div>
+
+    </div>
+    <script>
+        function updateClock()
+        {
+            var now = new Date();
+            var dname =now.getDay(),
+                mo=now.getMonth(),
+                dnum=now.getDate(),
+                yr=now.getFullYear(),
+                hr=now.getHours(),
+                min=now.getMinutes(),
+                secn=now.getSeconds(),
+                pe="AM";
+
+                if(hr==0)
+                {
+                    hr=12;
+                }
+                if(hr>12)
+                {
+                    hr=hr-12;
+                    pe="PM";
+                }
+
+
+            var months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+            var week=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","saturday"];
+            var ids=["dayname","month","daynum","year","hour","min","sec","period"];
+            var values=[week[dname],months[mo],dnum,yr,hr,min,secn,pe];
+            for(var i=0 ;i < ids.length ; i++ )
+            {
+                document.getElementById(ids[i]).firstChild.nodeValue=values[i];
+            }
+        }
+        function initClock()
+        {
+            updateClock();
+            window.setInterval("updateClock()", 1);
+        }
+    </script>
+</body>
+</html>
